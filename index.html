@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bidisha Joshi — Developer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+       
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home"     class="nav-link active">Home</a></li>
+        <li><a href="#about"    class="nav-link">About</a></li>
+        <li><a href="#skills"   class="nav-link">Skills</a></li>
+        <li><a href="#python"   class="nav-link">Python</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact"  class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="dots-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-greeting fade-up">Hello, World! 👋</p>
+      <h1 class="hero-name fade-up">I'm <span class="gradient-text">Bidisha Joshi</span></h1>
+      <div class="hero-role fade-up">
+        <span class="role-prefix">A </span>
+        <span class="typed-text" id="typedText"></span>
+        <span class="cursor">|</span>
+      </div>
+      <p class="hero-desc fade-up">BSc CSIT student · Designer · Developer · Based in Bhaktapur, Nepal 🇳🇵</p>
+      <div class="hero-cta fade-up">
+        <a href="#projects" class="btn btn-primary">View My Work <i class="fas fa-arrow-right"></i></a>
+        <a href="#contact"  class="btn btn-ghost">Get In Touch</a>
+      </div>
+      <div class="hero-socials fade-up">
+        <a href="https://github.com/bidishajoshi" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+        <a href="mailto:bidishajoshi@gmail.com"   class="social-icon"><i class="fas fa-envelope"></i></a>
+        <a href="#"                               class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div class="hero-scroll"><a href="#about"><span></span><span></span><span></span></a></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Get to know me</span>
+        <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <div class="about-card-wrapper">
+            <div class="about-avatar">
+              <img src="portfoliophoto.jpeg" alt="Bidisha Joshi" class="avatar-img" />
+              <div class="avatar-ring"></div>
+              <div class="avatar-ring ring-2"></div>
+            </div>
+            <div class="about-badge badge-1"><i class="fas fa-code"></i> Developer</div>
+            <div class="about-badge badge-2"><i class="fas fa-palette"></i> Designer</div>
+            <div class="about-badge badge-3"><i class="fas fa-graduation-cap"></i> Student</div>
+          </div>
+        </div>
+        <div class="about-info reveal">
+          <p class="about-intro">
+            I'm a passionate <strong>20-year-old CSIT student</strong> in my 4th year at
+            <strong>Swastik College, Chardobato, Bhaktapur</strong>, with a deep love for
+            building digital experiences that are both functional and beautiful.
+          </p>
+          <p class="about-text">
+            From writing my first line of HTML to designing graphics that tell a story,
+            I thrive at the intersection of technology and creativity. I believe great software
+            is not just about what it does — it's about how it feels.
+          </p>
+          <p class="about-text">
+            When I'm not coding or studying algorithms, you'll find me exploring design trends,
+            contributing to student tech communities, or experimenting with Python projects.
+            My goal is to grow into a full-stack developer who builds products that make a difference.
+          </p>
+          <div class="about-details">
+            <div class="detail-item"><i class="fas fa-birthday-cake"></i><span><strong>DOB:</strong> June 06, 2005</span></div>
+            <div class="detail-item"><i class="fas fa-map-marker-alt"></i><span><strong>Location:</strong> Suryabinayak, Bhaktapur, Nepal</span></div>
+            <div class="detail-item"><i class="fas fa-university"></i><span><strong>College:</strong> Swastik College, Bhaktapur</span></div>
+            <div class="detail-item"><i class="fas fa-book"></i><span><strong>Degree:</strong> BSc CSIT — 4th Year</span></div>
+          </div>
+          <a href="#contact" class="btn btn-primary mt-1">Let's Connect <i class="fas fa-paper-plane"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section section-alt" id="skills">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">What I work with</span>
+        <h2 class="section-title">My <span class="gradient-text">Skills</span></h2>
+      </div>
+      <div class="skills-grid reveal">
+        <div class="skill-card" style="--card-top:#ffd6e7">
+          <div class="skill-icon-wrap" style="--clr:#e44d26"><i class="fab fa-html5"></i></div>
+          <div class="skill-info">
+            <div class="skill-top"><span class="skill-name">HTML5</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--w:88%;--clr:#e44d26"></div></div>
+          </div>
+        </div>
+        <div class="skill-card" style="--card-top:#c7d2fe">
+          <div class="skill-icon-wrap" style="--clr:#4361ee"><i class="fab fa-css3-alt"></i></div>
+          <div class="skill-info">
+            <div class="skill-top"><span class="skill-name">CSS3</span><span class="skill-pct">82%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--w:82%;--clr:#4361ee"></div></div>
+          </div>
+        </div>
+        <div class="skill-card" style="--card-top:#ddd6fe">
+          <div class="skill-icon-wrap" style="--clr:#7952b3"><i class="fab fa-bootstrap"></i></div>
+          <div class="skill-info">
+            <div class="skill-top"><span class="skill-name">Bootstrap</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--w:75%;--clr:#7952b3"></div></div>
+          </div>
+        </div>
+        <div class="skill-card" style="--card-top:#bbf7d0">
+          <div class="skill-icon-wrap" style="--clr:#3776ab"><i class="fab fa-python"></i></div>
+          <div class="skill-info">
+            <div class="skill-top"><span class="skill-name">Python</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--w:80%;--clr:#3776ab"></div></div>
+          </div>
+        </div>
+        <div class="skill-card" style="--card-top:#bfdbfe">
+          <div class="skill-icon-wrap" style="--clr:#00599c"><i class="fas fa-copyright"></i></div>
+          <div class="skill-info">
+            <div class="skill-top"><span class="skill-name">C / C++</span><span class="skill-pct">72%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--w:72%;--clr:#00599c"></div></div>
+          </div>
+        </div>
+        <div class="skill-card" style="--card-top:#fecaca">
+          <div class="skill-icon-wrap" style="--clr:#e63946"><i class="fas fa-paint-brush"></i></div>
+          <div class="skill-info">
+            <div class="skill-top"><span class="skill-name">Graphics Design</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--w:85%;--clr:#e63946"></div></div>
+          </div>
+        </div>
+        <div class="skill-card" style="--card-top:#fed7aa">
+          <div class="skill-icon-wrap" style="--clr:#d83b01"><i class="fas fa-file-word"></i></div>
+          <div class="skill-info">
+            <div class="skill-top"><span class="skill-name">MS Office Suite</span><span class="skill-pct">90%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--w:90%;--clr:#d83b01"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PYTHON PROJECTS -->
+  <section class="section" id="python">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Built with Python 🐍</span>
+        <h2 class="section-title">Python <span class="gradient-text">Projects</span></h2>
+      </div>
+      <div class="python-grid reveal">
+
+        <div class="py-card" style="--py-accent:#dbeafe">
+          <div class="py-card-top">
+            <div class="py-icon" style="--ic:#3776ab"><i class="fab fa-python"></i></div>
+            <span class="py-badge" style="--bg:#dbeafe;--fg:#1d4ed8">Automation</span>
+          </div>
+          <h3 class="py-title">File Organizer</h3>
+          <p class="py-desc">Automatically sorts files in a directory by their extension — PDFs, images, videos moved into labeled folders instantly.</p>
+          <ul class="py-tech"><li>os</li><li>shutil</li><li>pathlib</li></ul>
+          <div class="py-footer">
+            <a href="https://github.com/bidishajoshi" target="_blank" class="py-link"><i class="fab fa-github"></i> View Code</a>
+          </div>
+        </div>
+
+        <div class="py-card" style="--py-accent:#fef9c3">
+          <div class="py-card-top">
+            <div class="py-icon" style="--ic:#ca8a04"><i class="fas fa-calculator"></i></div>
+            <span class="py-badge" style="--bg:#fef9c3;--fg:#854d0e">CLI App</span>
+          </div>
+          <h3 class="py-title">Grade Calculator</h3>
+          <p class="py-desc">Takes student marks as input and calculates GPA, letter grades, pass/fail, and generates a formatted result sheet.</p>
+          <ul class="py-tech"><li>Python 3</li><li>loops</li><li>functions</li></ul>
+          <div class="py-footer">
+            <a href="https://github.com/bidishajoshi" target="_blank" class="py-link"><i class="fab fa-github"></i> View Code</a>
+          </div>
+        </div>
+
+        <div class="py-card" style="--py-accent:#dcfce7">
+          <div class="py-card-top">
+            <div class="py-icon" style="--ic:#16a34a"><i class="fas fa-cloud-sun"></i></div>
+            <span class="py-badge" style="--bg:#dcfce7;--fg:#15803d">API</span>
+          </div>
+          <h3 class="py-title">Weather App</h3>
+          <p class="py-desc">Fetches live weather data via OpenWeatherMap API. Shows temperature, humidity, wind speed, and conditions for any city.</p>
+          <ul class="py-tech"><li>requests</li><li>json</li><li>API</li></ul>
+          <div class="py-footer">
+            <a href="https://github.com/bidishajoshi" target="_blank" class="py-link"><i class="fab fa-github"></i> View Code</a>
+          </div>
+        </div>
+
+        <div class="py-card" style="--py-accent:#ede9fe">
+          <div class="py-card-top">
+            <div class="py-icon" style="--ic:#7c3aed"><i class="fas fa-tasks"></i></div>
+            <span class="py-badge" style="--bg:#ede9fe;--fg:#5b21b6">CRUD App</span>
+          </div>
+          <h3 class="py-title">To-Do Manager</h3>
+          <p class="py-desc">Terminal-based task manager with add, delete, complete, and list features. Tasks persist between sessions using JSON.</p>
+          <ul class="py-tech"><li>json</li><li>datetime</li><li>OOP</li></ul>
+          <div class="py-footer">
+            <a href="https://github.com/bidishajoshi" target="_blank" class="py-link"><i class="fab fa-github"></i> View Code</a>
+          </div>
+        </div>
+
+        <div class="py-card" style="--py-accent:#fee2e2">
+          <div class="py-card-top">
+            <div class="py-icon" style="--ic:#dc2626"><i class="fas fa-lock"></i></div>
+            <span class="py-badge" style="--bg:#fee2e2;--fg:#b91c1c">Security</span>
+          </div>
+          <h3 class="py-title">Password Generator</h3>
+          <p class="py-desc">Creates strong, customizable passwords based on length and character sets. Includes a strength checker and clipboard copy.</p>
+          <ul class="py-tech"><li>random</li><li>string</li><li>pyperclip</li></ul>
+          <div class="py-footer">
+            <a href="https://github.com/bidishajoshi" target="_blank" class="py-link"><i class="fab fa-github"></i> View Code</a>
+          </div>
+        </div>
+
+        <div class="py-card" style="--py-accent:#ffedd5">
+          <div class="py-card-top">
+            <div class="py-icon" style="--ic:#ea580c"><i class="fas fa-chart-bar"></i></div>
+            <span class="py-badge" style="--bg:#ffedd5;--fg:#c2410c">Data</span>
+          </div>
+          <h3 class="py-title">CSV Data Analyzer</h3>
+          <p class="py-desc">Reads CSV files and generates statistical summaries — mean, median, mode — with simple bar charts using matplotlib.</p>
+          <ul class="py-tech"><li>csv</li><li>statistics</li><li>matplotlib</li></ul>
+          <div class="py-footer">
+            <a href="https://github.com/bidishajoshi" target="_blank" class="py-link"><i class="fab fa-github"></i> View Code</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GITHUB PROJECTS -->
+  <section class="section section-alt" id="projects">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">My GitHub Repos</span>
+        <h2 class="section-title">All <span class="gradient-text">Repositories</span></h2>
+      </div>
+      <div class="filter-bar reveal" id="filterBar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="HTML">HTML</button>
+        <button class="filter-btn" data-filter="CSS">CSS</button>
+        <button class="filter-btn" data-filter="Python">Python</button>
+        <button class="filter-btn" data-filter="JavaScript">JavaScript</button>
+        <button class="filter-btn" data-filter="Other">Other</button>
+      </div>
+      <div class="projects-grid" id="projectsGrid">
+        <div class="projects-loading" id="projectsLoading">
+          <div class="loader"></div>
+          <p>Fetching repositories from GitHub…</p>
+        </div>
+      </div>
+      <div class="projects-empty hidden" id="projectsEmpty">
+        <i class="fas fa-folder-open"></i>
+        <p>No projects found for this filter.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Say hello</span>
+        <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <p class="contact-desc">I'm currently open to internship opportunities and exciting collaborations. Whether you have a question, a project idea, or just want to say hi — my inbox is always open!</p>
+          <div class="contact-items">
+            <a href="mailto:bidishajoshi@gmail.com" class="contact-item">
+              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+              <div><span class="contact-label">Email</span><span class="contact-value">bidishajoshi@gmail.com</span></div>
+            </a>
+            <a href="https://github.com/bidishajoshi" target="_blank" class="contact-item">
+              <div class="contact-icon"><i class="fab fa-github"></i></div>
+              <div><span class="contact-label">GitHub</span><span class="contact-value">github.com/bidishajoshi</span></div>
+            </a>
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div><span class="contact-label">Location</span><span class="contact-value">Suryabinayak, Bhaktapur, Nepal</span></div>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form reveal" id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name"  />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="5" placeholder="Hello Bidisha, I'd love to connect…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Send Message <i class="fas fa-paper-plane"></i></button>
+          <p class="form-note" id="formNote"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#home" class="nav-logo"><span class="logo-bracket">&lt;</span>BJ<span class="logo-bracket">/&gt;</span></a>
+        
+        <div class="footer-socials">
+          <a href="https://github.com/bidishajoshi" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="mailto:bidishajoshi@gmail.com"><i class="fas fa-envelope"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2025 Bidisha Joshi. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <button class="back-top" id="backTop" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
