@@ -1,7 +1,7 @@
 'use strict';
 
 /* Typed Effect */
-const roles = ['Frontend Developer','Python Enthusiast','Graphics Designer','CSIT Student','Creative Thinker'];
+const roles = ['Software QA Engineer','Full-Stack Python Developer','Python Enthusiast','QA Automation Learner'];
 let roleIdx=0,charIdx=0,deleting=false;
 const typedEl=document.getElementById('typedText');
 function type(){
@@ -71,12 +71,26 @@ const LANG_COLORS={HTML:'#e44d26',CSS:'#264de4',JavaScript:'#d4a017',TypeScript:
 let allProjects=[];
 let activeFilter='all';
 
+function isFeatured(repo){
+  const text=`${repo.name} ${repo.description || ''}`.toLowerCase();
+  return /careerswipe|resume|grade|qa|testing|flask|python/.test(text);
+}
+
+function formatDate(value){
+  if(!value) return 'Recently updated';
+  return new Date(value).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
+}
+
 async function fetchProjects(){
   try{
     const res=await fetch(API_URL);
     if(!res.ok)throw new Error(res.status);
     const repos=await res.json();
-    allProjects=repos.filter(r=>!r.fork).sort((a,b)=>b.stargazers_count-a.stargazers_count||new Date(b.updated_at)-new Date(a.updated_at));
+    allProjects=repos.filter(r=>!r.fork).sort((a,b)=>{
+      const aFeatured=isFeatured(a)?1:0;
+      const bFeatured=isFeatured(b)?1:0;
+      return (bFeatured-aFeatured)||b.stargazers_count-a.stargazers_count||new Date(b.updated_at)-new Date(a.updated_at);
+    });
     loading.remove();
     if(allProjects.length===0)showFallback(); else{renderCards(allProjects);buildFilters(allProjects)}
   }catch(err){
@@ -87,9 +101,9 @@ async function fetchProjects(){
 
 function showFallback(){
   allProjects=[
-    {name:'Portfolio Website',description:'Personal portfolio built with HTML, CSS, and JavaScript showcasing projects and skills.',language:'HTML',html_url:'https://github.com/'+GITHUB_USER,stargazers_count:0},
-    {name:'Python Scripts',description:'A collection of useful Python automation and utility scripts.',language:'Python',html_url:'https://github.com/'+GITHUB_USER,stargazers_count:0},
-    {name:'CSS Animations',description:'Creative CSS animations and visual effects for web projects.',language:'CSS',html_url:'https://github.com/'+GITHUB_USER,stargazers_count:0},
+    {name:'CareerSwipe',description:'A project focused on career guidance and user experience.',language:'Python',html_url:'https://github.com/'+GITHUB_USER,homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
+    {name:'Resume Analyzer',description:'A Flask-based resume analysis tool with Python backend logic.',language:'Python',html_url:'https://github.com/'+GITHUB_USER,homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
+    {name:'Grade Calculator',description:'A simple utility for computing grades and academic summaries.',language:'Python',html_url:'https://github.com/'+GITHUB_USER,homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
   ];
   renderCards(allProjects);buildFilters(allProjects);
 }
@@ -105,30 +119,47 @@ function renderCards(repos){
     card.style.animationDelay=`${i*0.07}s`;
     const lang=repo.language||'Other';
     const color=LANG_COLORS[lang]||'#a855f7';
+    const featured=isFeatured(repo);
     card.innerHTML=`
       <div class="project-card-header">
-        <p class="project-name">${esc(repo.name.replace(/[-_]/g,' '))}</p>
+        <div class="project-card-title">
+          <p class="project-name">${esc(repo.name.replace(/[-_]/g,' '))}</p>
+          ${featured?'<span class="project-featured">Featured</span>':''}
+        </div>
         <a href="${repo.html_url}" target="_blank" class="project-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
       </div>
       <p class="project-desc">${repo.description?esc(repo.description):'No description provided.'}</p>
-      <div class="project-footer">
-        <div class="project-lang"><span class="lang-dot" style="background:${color}"></span>${esc(lang)}</div>
-        ${repo.stargazers_count>0?`<div class="project-stars"><i class="fas fa-star"></i>${repo.stargazers_count}</div>`:''}
-        <a href="${repo.html_url}" target="_blank" style="margin-left:auto;font-size:.78rem;color:var(--primary);font-weight:600">View →</a>
+      <div class="project-badges">
+        <span class="project-chip">${esc(lang)}</span>
+        <span class="project-chip project-chip-muted">Updated ${formatDate(repo.updated_at)}</span>
+      </div>
+      <div class="project-actions">
+        <a href="${repo.html_url}" target="_blank" class="project-action-btn">View on GitHub</a>
+        ${repo.homepage?`<a href="${repo.homepage}" target="_blank" class="project-action-btn project-action-btn-alt">Live Demo</a>`:''}
       </div>`;
     grid.appendChild(card);
   });
 }
 
 function buildFilters(repos){
-  const langs=['all',...new Set(repos.map(r=>r.language||'Other').filter(Boolean))];
+  filterBar.innerHTML='';
   const predefined=['all','HTML','CSS','Python','JavaScript','Other'];
-  langs.forEach(lang=>{
-    if(!predefined.includes(lang)){
-      const btn=document.createElement('button');
-      btn.className='filter-btn';btn.dataset.filter=lang;btn.textContent=lang;
-      filterBar.appendChild(btn);
-    }
+  predefined.forEach(lang=>{
+    const btn=document.createElement('button');
+    btn.className='filter-btn';
+    btn.dataset.filter=lang;
+    btn.textContent=lang;
+    if(lang==='all') btn.classList.add('active');
+    filterBar.appendChild(btn);
+  });
+  const customLangs=[...new Set(repos.map(r=>r.language||'Other').filter(l=>!predefined.includes(l)))]
+    .sort();
+  customLangs.forEach(lang=>{
+    const btn=document.createElement('button');
+    btn.className='filter-btn';
+    btn.dataset.filter=lang;
+    btn.textContent=lang;
+    filterBar.appendChild(btn);
   });
   filterBar.querySelectorAll('.filter-btn').forEach(btn=>{
     btn.addEventListener('click',()=>{
