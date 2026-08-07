@@ -83,7 +83,7 @@ function formatDate(value){
 
 async function fetchProjects(){
   try{
-    const res=await fetch(API_URL);
+    const res=await fetch(API_URL,{headers:{Accept:'application/vnd.github.v3+json'}});
     if(!res.ok)throw new Error(res.status);
     const repos=await res.json();
     allProjects=repos.filter(r=>!r.fork).sort((a,b)=>{
@@ -95,7 +95,8 @@ async function fetchProjects(){
     if(allProjects.length===0)showFallback(); else{renderCards(allProjects);buildFilters(allProjects)}
   }catch(err){
     console.error(err);
-    loading.innerHTML='<i class="fas fa-exclamation-circle" style="font-size:2rem;color:var(--text-muted)"></i><p>Could not load repositories. <a href="https://github.com/'+GITHUB_USER+'" target="_blank" style="color:var(--primary)">Visit GitHub →</a></p>';
+    loading.remove();
+    showFallback();
   }
 }
 
