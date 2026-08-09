@@ -26,7 +26,7 @@ story.append(Paragraph('<b>MAJOR SKILLS</b>', styles['Heading4']))
 skills = (
     'Programming Languages: C, C++, JavaScript, PHP, Python<br/>'
     'Frontend: HTML5, CSS3, Bootstrap, Responsive Design, UI Components<br/>'
-    'UI/UX: Figma, Canva<br/>'
+    'UI/UX Design: Figma, Canva, Wireframing, Prototyping<br/>'
     'Data & Backend: Python (Django, Flask)<br/>'
     'Databases: MySQL, PostgreSQL<br/>'
     'Tools & Version Control: Git, GitHub, VS Code, Excel<br/>'
