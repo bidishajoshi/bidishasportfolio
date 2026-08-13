@@ -138,10 +138,10 @@ function renderCards(repos){
   repos.forEach((repo,i)=>{
     const card=document.createElement('article');
     card.className='project-card';
-    card.dataset.lang=repo.language||'Other';
+    const displayLang=repo.language==='Hack'?'Other':repo.language||'Other';
+    card.dataset.lang=displayLang;
     card.style.animationDelay=`${i*0.07}s`;
-    const lang=repo.language||'Other';
-    const color=LANG_COLORS[lang]||'#a855f7';
+    const color=LANG_COLORS[displayLang]||'#a855f7';
     const featured=isFeatured(repo);
     card.innerHTML=`
       <div class="project-card-header">
@@ -153,7 +153,7 @@ function renderCards(repos){
       </div>
       <p class="project-desc">${repo.description?esc(repo.description):'No description provided.'}</p>
       <div class="project-badges">
-        <span class="project-chip">${esc(lang)}</span>
+        <span class="project-chip">${esc(displayLang)}</span>
         <span class="project-chip project-chip-muted">Updated ${formatDate(repo.updated_at)}</span>
       </div>
       <div class="project-actions">
@@ -175,7 +175,7 @@ function buildFilters(repos){
     if(lang==='all') btn.classList.add('active');
     filterBar.appendChild(btn);
   });
-  const customLangs=[...new Set(repos.map(r=>r.language||'Other').filter(l=>!predefined.includes(l)))]
+  const customLangs=[...new Set(repos.map(r=>r.language||'Other').filter(l=>!predefined.includes(l)&&l!=='Hack'))]
     .sort();
   customLangs.forEach(lang=>{
     const btn=document.createElement('button');
@@ -193,7 +193,10 @@ function buildFilters(repos){
 }
 
 function applyFilter(){
-  let filtered=activeFilter==='all'?allProjects:allProjects.filter(r=>(r.language||'Other')===activeFilter);
+  let filtered=activeFilter==='all'?allProjects:allProjects.filter(r=>{
+    const displayLang=r.language==='Hack'?'Other':r.language||'Other';
+    return displayLang===activeFilter;
+  });
   renderCards(filtered);
 }
 
