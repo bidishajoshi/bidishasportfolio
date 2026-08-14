@@ -90,7 +90,7 @@ async function fetchProjects(){
       const aFeatured=isFeatured(a)?1:0;
       const bFeatured=isFeatured(b)?1:0;
       return (bFeatured-aFeatured)||b.stargazers_count-a.stargazers_count||new Date(b.updated_at)-new Date(a.updated_at);
-    });
+    }).slice(0,5);
     loading.remove();
     if(allProjects.length===0)showFallback(); else{renderCards(allProjects);buildFilters(allProjects)}
   }catch(err){
@@ -107,27 +107,7 @@ function showFallback(){
     {name:'Portfolio',description:'Personal portfolio website created with HTML, CSS, and JavaScript.',language:'HTML',html_url:'https://github.com/'+GITHUB_USER+'/Portfolio',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
     {name:'JS-project',description:'JavaScript project collection demonstrating interactive UI features.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/JS-project',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
     {name:'memory-game',description:'A browser-based memory game implemented in JavaScript.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/memory-game',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'realtime-chat-app',description:'Real-time chat application built with JavaScript.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/realtime-chat-app',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'smart-attandence',description:'Smart attendance app developed with JavaScript and web technologies.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/smart-attandence',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'career-swipe',description:'Career swipe interface using modern web design components.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/career-swipe',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'careerswipes',description:'Web project for career exploration and user interaction.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/careerswipes',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'newcareerswipe',description:'Career-related web experience built with HTML and JavaScript.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/newcareerswipe',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'tictacktoe',description:'Classic Tic Tac Toe game using JavaScript.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/tictacktoe',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'DM',description:'Direct messaging web app built with JavaScript.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/DM',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'try',description:'A small JavaScript demo project for experimentation.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/try',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'ecommerce',description:'E-commerce front-end built with HTML, CSS, and JavaScript.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/ecommerce',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'bhatbhatey',description:'Local business website designed with HTML and CSS.',language:'HTML',html_url:'https://github.com/'+GITHUB_USER+'/bhatbhatey',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'EC',description:'A web project using HTML and CSS for UI layout.',language:'HTML',html_url:'https://github.com/'+GITHUB_USER+'/EC',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'CS',description:'A coding project with HTML, CSS and JavaScript components.',language:'HTML',html_url:'https://github.com/'+GITHUB_USER+'/CS',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'career-swipe',description:'A career exploration UI built with front-end web technologies.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/career-swipe',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'fileorganizer',description:'File organizer utility developed in Python.',language:'Python',html_url:'https://github.com/'+GITHUB_USER+'/fileorganizer',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'grade_calculator',description:'Academic grade calculator using Python.',language:'Python',html_url:'https://github.com/'+GITHUB_USER+'/grade_calculator',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'resume-analyzer',description:'Resume analyzer tool built with Flask and Python.',language:'Python',html_url:'https://github.com/'+GITHUB_USER+'/resume-analyzer',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'CareerSwipe-testing',description:'QA and testing scripts for the CareerSwipe project.',language:'Python',html_url:'https://github.com/'+GITHUB_USER+'/CareerSwipe-testing',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'Qa_automation',description:'QA automation examples and testing utilities in Python.',language:'Python',html_url:'https://github.com/'+GITHUB_USER+'/Qa_automation',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'qa_playwright',description:'Playwright test scripts for web QA automation.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/qa_playwright',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'Advance-Java',description:'Java learning project and practice exercises.',language:'Java',html_url:'https://github.com/'+GITHUB_USER+'/Advance-Java',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-  ];
+  ].slice(0,5);
   renderCards(allProjects);buildFilters(allProjects);
 }
 
