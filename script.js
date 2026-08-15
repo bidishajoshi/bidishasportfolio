@@ -117,7 +117,7 @@ async function fetchProjects(){
     if(!res.ok)throw new Error(res.status);
     const repos=await res.json();
     const githubProjects=repos.map(normalizeRepo).filter(repo => !repositoryCatalog.some(item => cleanProjectName(item.name).toLowerCase() === cleanProjectName(repo.name).toLowerCase()));
-    allProjects=[...repositoryCatalog, ...githubProjects].sort((a,b)=>{
+    allProjects=[...repositoryCatalog].sort((a,b)=>{
       const aFeatured=isFeatured(a)?1:0;
       const bFeatured=isFeatured(b)?1:0;
       return (bFeatured-aFeatured)||b.stargazers_count-a.stargazers_count||new Date(b.updated_at)-new Date(a.updated_at);
