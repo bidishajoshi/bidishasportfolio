@@ -71,9 +71,22 @@ const LANG_COLORS={HTML:'#e44d26',CSS:'#264de4',JavaScript:'#d4a017',TypeScript:
 let allProjects=[];
 let activeFilter='all';
 
+const repositoryCatalog=[
+  {name:'CareerSwipe', description:'AI-powered job recommendation platform that matches candidates with relevant roles and employer opportunities.', language:'Python', html_url:'https://github.com/bidishajoshi/CareerSwipe', homepage:'#', updated_at:'2024-06-11T00:00:00Z', stargazers_count:0, isFeatured:true},
+  {name:'Resume Analyzer', description:'A resume and job-description analysis tool that evaluates ATS compatibility and highlights improvement suggestions.', language:'Python', html_url:'https://github.com/bidishajoshi/Resume-Analyzer', homepage:'#', updated_at:'2024-05-20T00:00:00Z', stargazers_count:0, isFeatured:true},
+  {name:'Grade Calculator', description:'A simple academic performance calculator for assigning grades, computing percentages, and tracking results.', language:'JavaScript', html_url:'https://github.com/bidishajoshi/Grade-Calculator', homepage:'#', updated_at:'2024-04-14T00:00:00Z', stargazers_count:0, isFeatured:true},
+  {name:'Attendance System', description:'A student attendance management system for recording daily presence, checking reports, and organizing class sessions.', language:'HTML', html_url:'https://github.com/bidishajoshi/Attendance-System', homepage:'#', updated_at:'2024-03-28T00:00:00Z', stargazers_count:0, isFeatured:true},
+  {name:'QA Playwright', description:'Automated QA testing project using Playwright to validate workflows, user interactions, and browser-level behavior.', language:'JavaScript', html_url:'https://github.com/bidishajoshi/QA-Playwright', homepage:'#', updated_at:'2024-02-18T00:00:00Z', stargazers_count:0, isFeatured:true},
+  {name:'Portfolio Website', description:'Responsive personal portfolio website built with HTML, CSS, and JavaScript to showcase projects and skills.', language:'HTML', html_url:'https://github.com/bidishajoshi/bidishasportfolio', homepage:'#', updated_at:'2024-01-08T00:00:00Z', stargazers_count:0, isFeatured:false},
+  {name:'Photography Website', description:'A PHP gallery website designed for responsive photography portfolios and image showcase pages.', language:'PHP', html_url:'https://github.com/bidishajoshi/Photography-Website-in-PHP-master', homepage:'#', updated_at:'2023-12-12T00:00:00Z', stargazers_count:0, isFeatured:false},
+  {name:'Java Student Portal', description:'A Java-based student record and management system with academic and administrative functions.', language:'Java', html_url:'https://github.com/bidishajoshi/Java-Student-Portal', homepage:'#', updated_at:'2023-11-19T00:00:00Z', stargazers_count:0, isFeatured:false},
+  {name:'CSS UI Components', description:'A collection of reusable UI components and modern CSS design experiments using layered styling.', language:'CSS', html_url:'https://github.com/bidishajoshi/CSS-UI-Components', homepage:'#', updated_at:'2023-10-22T00:00:00Z', stargazers_count:0, isFeatured:false},
+  {name:'JS Mini Projects', description:'Multiple JavaScript practice projects covering interactive features, animations, and frontend logic.', language:'JavaScript', html_url:'https://github.com/bidishajoshi/JS-project', homepage:'#', updated_at:'2023-09-11T00:00:00Z', stargazers_count:0, isFeatured:false}
+];
+
 function isFeatured(repo){
   const text=`${repo.name} ${repo.description || ''}`.toLowerCase();
-  return /careerswipe|resume|grade|qa|testing|flask|python/.test(text);
+  return repo.isFeatured || /careerswipe|resume analyzer|resume|grade calculator|attendance|playwright|qa|testing|job|student|portfolio/.test(text);
 }
 
 function formatDate(value){
@@ -81,34 +94,42 @@ function formatDate(value){
   return new Date(value).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
 }
 
+function normalizeRepo(repo){
+  const displayLang = repo.language === 'Hack' ? 'Other' : repo.language || 'Other';
+  return {
+    ...repo,
+    name: repo.name || 'Project',
+    description: repo.description || 'No description provided.',
+    language: displayLang,
+    html_url: repo.html_url || '#',
+    homepage: repo.homepage || '',
+    updated_at: repo.updated_at || new Date().toISOString(),
+    stargazers_count: repo.stargazers_count || 0,
+    isFeatured: repo.isFeatured || isFeatured(repo)
+  };
+}
+
 async function fetchProjects(){
   try{
     const res=await fetch(API_URL,{headers:{Accept:'application/vnd.github.v3+json'}});
     if(!res.ok)throw new Error(res.status);
     const repos=await res.json();
-    allProjects=repos.sort((a,b)=>{
+    const githubProjects=repos.map(normalizeRepo).filter(repo => !repositoryCatalog.some(item => item.name.toLowerCase() === repo.name.toLowerCase()));
+    allProjects=[...repositoryCatalog, ...githubProjects].sort((a,b)=>{
       const aFeatured=isFeatured(a)?1:0;
       const bFeatured=isFeatured(b)?1:0;
       return (bFeatured-aFeatured)||b.stargazers_count-a.stargazers_count||new Date(b.updated_at)-new Date(a.updated_at);
-    }).slice(0,5);
+    }).slice(0, 6);
     loading.remove();
-    if(allProjects.length===0)showFallback(); else{renderCards(allProjects);buildFilters(allProjects)}
+    renderCards(allProjects);
+    buildFilters(allProjects);
   }catch(err){
     console.error(err);
     loading.remove();
-    showFallback();
+    allProjects=[...repositoryCatalog].slice(0, 6);
+    renderCards(allProjects);
+    buildFilters(allProjects);
   }
-}
-
-function showFallback(){
-  allProjects=[
-    {name:'bidishasportfolio',description:'Portfolio website built with HTML, CSS, and JavaScript.',language:'HTML',html_url:'https://github.com/'+GITHUB_USER+'/bidishasportfolio',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'Photography-Website-in-PHP-master',description:'Photography portfolio built with PHP and responsive HTML/CSS.',language:'PHP',html_url:'https://github.com/'+GITHUB_USER+'/Photography-Website-in-PHP-master',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'Portfolio',description:'Personal portfolio website created with HTML, CSS, and JavaScript.',language:'HTML',html_url:'https://github.com/'+GITHUB_USER+'/Portfolio',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'JS-project',description:'JavaScript project collection demonstrating interactive UI features.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/JS-project',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-    {name:'memory-game',description:'A browser-based memory game implemented in JavaScript.',language:'JavaScript',html_url:'https://github.com/'+GITHUB_USER+'/memory-game',homepage:'',updated_at:new Date().toISOString(),stargazers_count:0},
-  ].slice(0,5);
-  renderCards(allProjects);buildFilters(allProjects);
 }
 
 function renderCards(repos){
@@ -138,15 +159,16 @@ function renderCards(repos){
       </div>
       <div class="project-actions">
         <a href="${repo.html_url}" target="_blank" class="project-action-btn">View on GitHub</a>
-        ${repo.homepage?`<a href="${repo.homepage}" target="_blank" class="project-action-btn project-action-btn-alt">Live Demo</a>`:''}
+        ${repo.homepage && repo.homepage !== '#' ? `<a href="${repo.homepage}" target="_blank" class="project-action-btn project-action-btn-alt">Live Demo</a>` : ''}
       </div>`;
+    card.style.setProperty('--project-color', color);
     grid.appendChild(card);
   });
 }
 
 function buildFilters(repos){
   filterBar.innerHTML='';
-  const predefined=['all','HTML','CSS','Python','JavaScript','Other'];
+  const predefined=['all','HTML','CSS','Python','JavaScript','Java','PHP','Other'];
   predefined.forEach(lang=>{
     const btn=document.createElement('button');
     btn.className='filter-btn';
@@ -155,8 +177,7 @@ function buildFilters(repos){
     if(lang==='all') btn.classList.add('active');
     filterBar.appendChild(btn);
   });
-  const customLangs=[...new Set(repos.map(r=>r.language||'Other').filter(l=>!predefined.includes(l)&&l!=='Hack'))]
-    .sort();
+  const customLangs=[...new Set(repos.map(r=>r.language||'Other').filter(l=>!predefined.includes(l)&&l!=='Hack'))].sort();
   customLangs.forEach(lang=>{
     const btn=document.createElement('button');
     btn.className='filter-btn';
@@ -173,10 +194,10 @@ function buildFilters(repos){
 }
 
 function applyFilter(){
-  let filtered=activeFilter==='all'?allProjects:allProjects.filter(r=>{
+  let filtered=activeFilter==='all' ? allProjects.slice(0, 6) : allProjects.filter(r=>{
     const displayLang=r.language==='Hack'?'Other':r.language||'Other';
     return displayLang===activeFilter;
-  });
+  }).slice(0, 6);
   renderCards(filtered);
 }
 
