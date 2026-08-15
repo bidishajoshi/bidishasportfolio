@@ -78,7 +78,8 @@ const repositoryCatalog=[
   {name:'JS Mini Projects', description:'A collection of JavaScript mini-projects focused on browser interactions, animations, and UI logic.', language:'JavaScript', html_url:'https://github.com/bidishajoshi/JS-project', homepage:'https://js-mini-projects-demo.vercel.app/', updated_at:'2024-03-28T00:00:00Z', stargazers_count:0, isFeatured:true},
   {name:'Attendance System', description:'Student attendance tracking system for managing class presence, reports, and productivity summaries.', language:'HTML', html_url:'https://github.com/bidishajoshi/Attendance-System', homepage:'https://attendance-system-demo.vercel.app/', updated_at:'2024-02-18T00:00:00Z', stargazers_count:0, isFeatured:true},
   {name:'QA Automation', description:'Playwright-based automated QA project for testing core user flows and verifying application reliability.', language:'JavaScript', html_url:'https://github.com/bidishajoshi/QA-Playwright', homepage:'https://qa-automation-demo.vercel.app/', updated_at:'2024-01-20T00:00:00Z', stargazers_count:0, isFeatured:true},
-  {name:'bidishasportfolio', description:'Responsive personal portfolio website built to present projects, skills, and professional profile in a modern layout.', language:'HTML', html_url:'https://github.com/bidishajoshi/bidishasportfolio', homepage:'https://bidishasportfolio.onrender.com/', updated_at:'2024-01-08T00:00:00Z', stargazers_count:0, isFeatured:true}
+  {name:'Real Time Chat App', description:'Live messaging application focused on instant communication, real-time updates, and responsive user interaction.', language:'JavaScript', html_url:'https://github.com/bidishajoshi/Real-Time-Chat-App', homepage:'https://real-time-chat-demo.vercel.app/', updated_at:'2024-01-12T00:00:00Z', stargazers_count:0, isFeatured:true},
+  {name:'Portfolio Website', description:'Responsive personal portfolio website built to present projects, skills, and professional profile in a modern layout.', language:'HTML', html_url:'https://github.com/bidishajoshi/bidishasportfolio', homepage:'https://bidishasportfolio.onrender.com/', updated_at:'2024-01-08T00:00:00Z', stargazers_count:0, isFeatured:true}
 ];
 
 function cleanProjectName(name){
@@ -121,7 +122,7 @@ async function fetchProjects(){
       const aFeatured=isFeatured(a)?1:0;
       const bFeatured=isFeatured(b)?1:0;
       return (bFeatured-aFeatured)||b.stargazers_count-a.stargazers_count||new Date(b.updated_at)-new Date(a.updated_at);
-    }).slice(0, 7);
+    }).slice(0, 8);
     loading.remove();
     renderCards(allProjects);
     buildFilters(allProjects);
@@ -197,10 +198,10 @@ function buildFilters(repos){
 }
 
 function applyFilter(){
-  let filtered=activeFilter==='all' ? allProjects.slice(0, 7) : allProjects.filter(r=>{
+  let filtered=activeFilter==='all' ? allProjects.slice(0, 8) : allProjects.filter(r=>{
     const displayLang=r.language==='Hack'?'Other':r.language||'Other';
     return displayLang===activeFilter;
-  }).slice(0, 7);
+  }).slice(0, 8);
   renderCards(filtered);
 }
 
