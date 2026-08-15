@@ -81,6 +81,10 @@ const repositoryCatalog=[
   {name:'Portfolio Website', description:'Responsive personal portfolio designed to present projects, skills, and professional profile in a modern layout.', language:'HTML', html_url:'https://github.com/bidishajoshi/bidishasportfolio', homepage:'https://bidishasportfolio.onrender.com/', updated_at:'2024-01-08T00:00:00Z', stargazers_count:0, isFeatured:false}
 ];
 
+function cleanProjectName(name){
+  return String(name || 'Project').replace(/^new\s*/i, '').replace(/[-_]/g, ' ').trim();
+}
+
 function isFeatured(repo){
   const text=`${repo.name} ${repo.description || ''}`.toLowerCase();
   return repo.isFeatured || /careerswipe|resume analyzer|resume|grade calculator|attendance|playwright|qa|testing|job|student|portfolio/.test(text);
@@ -93,9 +97,10 @@ function formatDate(value){
 
 function normalizeRepo(repo){
   const displayLang = repo.language === 'Hack' ? 'Other' : repo.language || 'Other';
+  const cleanedName = cleanProjectName(repo.name || 'Project');
   return {
     ...repo,
-    name: repo.name || 'Project',
+    name: cleanedName,
     description: repo.description || 'No description provided.',
     language: displayLang,
     html_url: repo.html_url || '#',
@@ -111,7 +116,7 @@ async function fetchProjects(){
     const res=await fetch(API_URL,{headers:{Accept:'application/vnd.github.v3+json'}});
     if(!res.ok)throw new Error(res.status);
     const repos=await res.json();
-    const githubProjects=repos.map(normalizeRepo).filter(repo => !repositoryCatalog.some(item => item.name.toLowerCase() === repo.name.toLowerCase()));
+    const githubProjects=repos.map(normalizeRepo).filter(repo => !repositoryCatalog.some(item => cleanProjectName(item.name).toLowerCase() === cleanProjectName(repo.name).toLowerCase()));
     allProjects=[...repositoryCatalog, ...githubProjects].sort((a,b)=>{
       const aFeatured=isFeatured(a)?1:0;
       const bFeatured=isFeatured(b)?1:0;
@@ -141,10 +146,11 @@ function renderCards(repos){
     card.style.animationDelay=`${i*0.07}s`;
     const color=LANG_COLORS[displayLang]||'#a855f7';
     const featured=isFeatured(repo);
+    const safeName = cleanProjectName(repo.name);
     card.innerHTML=`
       <div class="project-card-header">
         <div class="project-card-title">
-          <p class="project-name">${esc(repo.name.replace(/[-_]/g,' '))}</p>
+          <p class="project-name">${esc(safeName)}</p>
           ${featured?'<span class="project-featured">Featured</span>':''}
         </div>
         <a href="${repo.html_url}" target="_blank" class="project-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
